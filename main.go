@@ -1,5 +1,5 @@
 /*
-Copyright © 2026 NAME HERE <EMAIL ADDRESS>
+Copyright © 2026 Fabrice Tereszkiewicz @ A/Z&T <fabrice@azt.com>
 
 */
 package main
