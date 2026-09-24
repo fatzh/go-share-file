@@ -28,8 +28,7 @@ var rootCmd = &cobra.Command{
 
 It requires your machine to be accessible directly via the internet. You can configure the hostname and port on 
 which to share the file in environment variables or via arguments. The file you share must be in the current directory.
-
-By default the server automatically stops after the file has been downloaded.`,
+`,
 
   // here we go!
   Run: func(cmd *cobra.Command, args []string) { 
@@ -105,8 +104,6 @@ func fileHandler(w http.ResponseWriter, r *http.Request) {
   IPAddress := ReadUserIP(r)
   fmt.Println("One hit for " + filename + " from " + IPAddress)
   http.ServeFile(w, r, filepathAbs)
-  fmt.Println("\nBye bye")
-  os.Exit(1)
 }
 
 
