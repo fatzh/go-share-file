@@ -153,7 +153,7 @@ which to share the file in environment variables or via arguments. The file you 
 			// coroutine for the server
 			go func() {
 				err := server.ListenAndServe()
-				if err != nil && errors.Is(err, http.ErrServerClosed) {
+				if err != nil && !errors.Is(err, http.ErrServerClosed) {
 					app.QueueUpdateDraw(func() {
 						statusView.SetText(fmt.Sprintf("Server error: %v", err))
 					})
@@ -164,6 +164,9 @@ which to share the file in environment variables or via arguments. The file you 
 				panic(err)
 			}
 
+			// once the app.Run() above returns, i.e. if the user quits,
+			// this below ensure a 5 second gracefull shotdown of the server
+			// to prevent file corruption, etc..
 			ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
 			defer cancel()
 
